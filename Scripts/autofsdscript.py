@@ -6,7 +6,7 @@ import threading
 import time
 
 # Configure logging
-logging.basicConfig(filename='/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript2.log',
+logging.basicConfig(filename='/path_to_your_log-file/autofsdscript2.log',
                     format='%(asctime)s - %(message)s',
                     level=logging.INFO)
 
@@ -151,5 +151,5 @@ def scan_host(nm, host, unix_targets, windows_targets):
         logging.warning(f"No suitable service found on host {host}")
 
 if __name__ == "__main__":
-    TARGETS_FILE_PATH = '/opt/homebrew/etc/targets.yml'
+    TARGETS_FILE_PATH = '/path_to_your_targets-file/targets.yml'
     update_targets_file(TARGETS_FILE_PATH)
