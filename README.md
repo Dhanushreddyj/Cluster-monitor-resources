@@ -141,4 +141,5 @@ For any questions or issues, please contact [Dhanush reddy Janagama](f20220005@h
 
 ---
 
-Replace `/path_to_your_script/` with the actual path where you place your `autofsdscript.py` file. This will guide users to customize the location based on their device folders.
+Replace `/path_to_your_script/` with the actual path where you place your `autofsdscript.py` file. Dont forget to replace 'path_to_your----' in the codes you use from this repo.
+
