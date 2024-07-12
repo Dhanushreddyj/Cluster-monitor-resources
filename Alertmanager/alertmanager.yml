@@ -17,12 +17,12 @@ route:
 receivers:
   - name: 'email_notifications'
     email_configs:
-      - to: f20222023@hyderabad.bits-pilani.ac.in  # Recipient email address
-        from: f20220005@hyderabad.bits-pilani.ac.in  # Sender email address
+      - to: reciever-mail@address  # Recipient email address CHANGE THIS
+        from: sender-mail@address  # Sender email address CHANGE THIS
         smarthost: smtp.gmail.com:587  # SMTP server and port
-        auth_username: f20220005@hyderabad.bits-pilani.ac.in  # SMTP username
-        auth_identity: f20220005@hyderabad.bits-pilani.ac.in  # SMTP identity
-        auth_password: htrd zhic fwqe xoxr  # SMTP password (consider using a more secure method to store this)
+        auth_username: sender-mail@address  # SMTP username CHANGE THIS 
+        auth_identity: sender-mail@address  # SMTP identity CHANGE THIS
+        auth_password: xxxx xxxx xxxx xxxx  # SMTP password (consider using a more secure method to store this) CHANGE THIS
         send_resolved: true  # Send notification when an alert is resolved
 
 inhibit_rules:
