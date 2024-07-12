@@ -2,23 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- Label for the launch agent -->
     <key>Label</key>
     <string>com.prom.autofsdscript</string>
+    
+    <!-- ProgramArguments specify the executable and script to run -->
     <key>ProgramArguments</key>
     <array>
+        <!-- Path to the Python 3 executable -->
         <string>/usr/bin/python3</string>
+        <!-- Path to the Python script to be executed -->
         <string>/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript.py</string>
     </array>
+    
+    <!-- Run the script every 5 minutes (300 seconds) -->
     <key>StartInterval</key>
     <integer>300</integer> <!-- Every 5 minutes (300 seconds) -->
+    
+    <!-- Log paths for standard output -->
     <key>StandardOutPath</key>
     <string>/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript.log</string>
+    
+    <!-- Log paths for standard error -->
     <key>StandardErrorPath</key>
     <string>/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript.log</string>
+    
+    <!-- Run the script when the agent is loaded -->
     <key>RunAtLoad</key>
     <true/>
+    
+    <!-- Set the PATH environment variable -->
     <key>EnvironmentVariables</key>
     <dict>
+        <!-- Specify the PATH environment variable to include necessary directories -->
         <key>PATH</key>
         <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     </dict>
