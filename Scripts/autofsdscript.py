@@ -11,6 +11,15 @@ logging.basicConfig(filename='/Users/dhanushreddyjanagama/Developer/Scripts/auto
                     level=logging.INFO)
 
 def get_local_network_range():
+    """
+    Determine the local network range by examining the system's network interfaces.
+    
+    Returns:
+        str: The network address in CIDR notation (e.g., '192.168.1.0/24').
+
+    Raises:
+        ValueError: If unable to determine the local network range.
+    """
     interfaces = netifaces.interfaces()
     for interface in interfaces:
         if_addresses = netifaces.ifaddresses(interface)
@@ -28,6 +37,15 @@ def get_local_network_range():
     raise ValueError("Unable to determine the local network range")
 
 def get_active_nodes(network):
+    """
+    Perform a network scan to identify active nodes in the specified network.
+
+    Args:
+        network (str): The network address in CIDR notation.
+
+    Returns:
+        tuple: A tuple containing the PortScanner object and a list of active nodes' IP addresses.
+    """
     nm = nmap.PortScanner()
     try:
         start_time = time.time()
@@ -42,6 +60,17 @@ def get_active_nodes(network):
     return nm, nodes
 
 def service_running(nm, host, port):
+    """
+    Check if a specific service (port) is running on a given host.
+
+    Args:
+        nm (PortScanner): The nmap PortScanner object.
+        host (str): The IP address of the host.
+        port (int): The port number to check.
+
+    Returns:
+        bool: True if the port is open, False otherwise.
+    """
     try:
         start_time = time.time()
         nm.scan(hosts=host, arguments=f'-p {port}')
@@ -58,6 +87,12 @@ def service_running(nm, host, port):
         return False
 
 def update_targets_file(file_path):
+    """
+    Update the Prometheus targets file with discovered services.
+
+    Args:
+        file_path (str): The path to the targets.yml file.
+    """
     network = get_local_network_range()
     logging.info(f"Determined local network range: {network}")
 
@@ -67,6 +102,7 @@ def update_targets_file(file_path):
     nm, active_nodes = get_active_nodes(network)
     logging.info("Started scanning network for active nodes")
 
+    # Use threading to scan hosts concurrently
     threads = []
     for host in active_nodes:
         t = threading.Thread(target=scan_host, args=(nm, host, unix_targets, windows_targets))
@@ -86,6 +122,15 @@ def update_targets_file(file_path):
         logging.error(f"Failed to update targets.yml: {str(e)}")
 
 def scan_host(nm, host, unix_targets, windows_targets):
+    """
+    Scan a host for specific services and update the target lists accordingly.
+
+    Args:
+        nm (PortScanner): The nmap PortScanner object.
+        host (str): The IP address of the host.
+        unix_targets (list): List to store UNIX target information.
+        windows_targets (list): List to store Windows target information.
+    """
     if service_running(nm, host, 9100):
         unix_targets.append({
             'targets': [f"{host}:9100"],

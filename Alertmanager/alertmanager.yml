@@ -1,24 +1,33 @@
 global:
+  # Timeout for notifications to resolve
   resolve_timeout: 1m
+
 route:
+  # Group alerts by 'alertname'
   group_by: ['alertname']
+  # Wait time before sending the first notification for a new group
   group_wait: 30s
+  # Minimum wait time between sending notifications for the same group
   group_interval: 5m
+  # Minimum wait time before resending notifications for the same alert
   repeat_interval: 1h
-  receiver: 'email_notfications'
+  # Default receiver if no other route matches
+  receiver: 'email_notifications'
+
 receivers:
-  - name: 'email_notfications'
+  - name: 'email_notifications'
     email_configs:
-    - to: f20222023@hyderabad.bits-pilani.ac.in
-      from: f20220005@hyderabad.bits-pilani.ac.in
-      smarthost: smtp.gmail.com:587
-      auth_username: f20220005@hyderabad.bits-pilani.ac.in
-      auth_identity: f20220005@hyderabad.bits-pilani.ac.in
-      auth_password: htrd zhic fwqe xoxr
-      send_resolved: true
+      - to: f20222023@hyderabad.bits-pilani.ac.in  # Recipient email address
+        from: f20220005@hyderabad.bits-pilani.ac.in  # Sender email address
+        smarthost: smtp.gmail.com:587  # SMTP server and port
+        auth_username: f20220005@hyderabad.bits-pilani.ac.in  # SMTP username
+        auth_identity: f20220005@hyderabad.bits-pilani.ac.in  # SMTP identity
+        auth_password: htrd zhic fwqe xoxr  # SMTP password (consider using a more secure method to store this)
+        send_resolved: true  # Send notification when an alert is resolved
+
 inhibit_rules:
   - source_match:
-      severity: 'critical'
+      severity: 'critical'  # Alerts with severity 'critical'
     target_match:
-      severity: 'warning'
-    equal: ['alertname', 'dev', 'instance']
+      severity: 'warning'  # Will inhibit alerts with severity 'warning'
+    equal: ['alertname', 'dev', 'instance']  # Inhibition applies if these labels are equal

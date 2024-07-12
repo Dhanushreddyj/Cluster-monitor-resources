@@ -1,62 +1,47 @@
 global:
+  # Set the interval at which Prometheus will scrape targets
   scrape_interval: 15s
+  # Set the interval at which Prometheus will evaluate rules
   evaluation_interval: 15s
 
 scrape_configs:
+  # Job to discover and scrape exporters
   - job_name: 'Exporters'
     file_sd_configs:
       - files:
+          # Specify the file that contains the list of targets to scrape
           - /opt/homebrew/etc/targets.yml
+        # How often Prometheus checks the file for changes
         refresh_interval: 30s
-        #
-#scrape_configs:
-#  - job_name: 'node_exporter'
-#    file_sd_configs:
-#      - files:
-#          - /opt/homebrew/etc/targets.yml
-#        refresh_interval: 30s
+
+# Additional scrape configurations can be defined here
+
+# Uncomment and modify the below sections if you want to create specific scrape jobs for node_exporter or wmi_exporter
+
+# scrape_configs:
+#   - job_name: 'node_exporter'
+#     file_sd_configs:
+#       - files:
+#           - /opt/homebrew/etc/targets.yml
+#         refresh_interval: 30s
     # Optional: Define metric_relabel_configs or other configurations specific to node_exporter job
 
-#  - job_name: 'wmi_exporter'
-#    file_sd_configs:
-#      - files:
-#          - /opt/homebrew/etc/targets.yml
-#        refresh_interval: 30s
+#   - job_name: 'wmi_exporter'
+#     file_sd_configs:
+#       - files:
+#           - /opt/homebrew/etc/targets.yml
+#         refresh_interval: 30s
     # Optional: Define metric_relabel_configs or other configurations specific to wmi_exporter job
-
-# Additional scrape_configs for other jobs as needed
 
 # Alertmanager configuration
 alerting:
   alertmanagers:
     - static_configs:
       - targets:
+        # Specify the address of the Alertmanager to send alerts to
         - 'localhost:9093'
-# Load rules once and periodically evaluate them according to the global 'evaluation interval'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'
 rule_files:
+  # Specify the file that contains alert rules
   - "alert_rules.yml"
-#scrape_configs:
-#
-#  - job_name: "prometheus"
-#    static_configs:
-#    - targets: ["localhost:9090"]
-#
-#  - job_name: "My_node"
-#    static_configs:
-#    - targets: ["localhost:9100"]
-#
-#  - job_name: "Aditya_node"
-#    static_configs:
-#    - targets: ["192.168.20.220:9100"]
-#
-#  - job_name: "Mukund_node"
-#    static_configs:
-#    - targets: ["192.168.20.210:9182"]
-#
-#  - job_name: "Yash_node"
-#    static_configs:
-#    - targets: ["192.168.20.222:9182"]
-#
-#  - job_name: "Monal_node"
-#    static_configs:
-#    - targets: ["192.168.20.116:9182"]
