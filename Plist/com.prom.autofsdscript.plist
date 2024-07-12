@@ -12,7 +12,7 @@
         <!-- Path to the Python 3 executable -->
         <string>/usr/bin/python3</string>
         <!-- Path to the Python script to be executed -->
-        <string>/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript.py</string>
+        <string>/path_to_your_script/autofsdscript.py</string>
     </array>
     
     <!-- Run the script every 5 minutes (300 seconds) -->
@@ -21,11 +21,11 @@
     
     <!-- Log paths for standard output -->
     <key>StandardOutPath</key>
-    <string>/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript.log</string>
+    <string>/path_to_your_log-file/autofsdscript.log</string>
     
     <!-- Log paths for standard error -->
     <key>StandardErrorPath</key>
-    <string>/Users/dhanushreddyjanagama/Developer/Scripts/autofsdscript.log</string>
+    <string>/path_to_your_log-file/autofsdscript.log</string>
     
     <!-- Run the script when the agent is loaded -->
     <key>RunAtLoad</key>
@@ -34,7 +34,7 @@
     <!-- Set the PATH environment variable -->
     <key>EnvironmentVariables</key>
     <dict>
-        <!-- Specify the PATH environment variable to include necessary directories -->
+        <!-- Specify the PATH environment variable to include necessary directories dont forget to change this to your need -->
         <key>PATH</key>
         <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     </dict>
