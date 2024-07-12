@@ -10,7 +10,7 @@ scrape_configs:
     file_sd_configs:
       - files:
           # Specify the file that contains the list of targets to scrape
-          - /opt/homebrew/etc/targets.yml
+          - /path_to_your_targets-file/targets.yml
         # How often Prometheus checks the file for changes
         refresh_interval: 30s
 
@@ -22,14 +22,14 @@ scrape_configs:
 #   - job_name: 'node_exporter'
 #     file_sd_configs:
 #       - files:
-#           - /opt/homebrew/etc/targets.yml
+#           - /path_to_your_targets-file/targets.yml
 #         refresh_interval: 30s
     # Optional: Define metric_relabel_configs or other configurations specific to node_exporter job
 
 #   - job_name: 'wmi_exporter'
 #     file_sd_configs:
 #       - files:
-#           - /opt/homebrew/etc/targets.yml
+#           - /path_to_your_targets-file/targets.yml
 #         refresh_interval: 30s
     # Optional: Define metric_relabel_configs or other configurations specific to wmi_exporter job
 
