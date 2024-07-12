@@ -1,0 +1,5 @@
+# Network scanning and utilities
+netifaces==0.11.0
+nmap==0.6.1
+
+
