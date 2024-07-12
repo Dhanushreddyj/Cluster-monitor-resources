@@ -1,0 +1,24 @@
+global:
+  resolve_timeout: 1m
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: 'email_notfications'
+receivers:
+  - name: 'email_notfications'
+    email_configs:
+    - to: f20222023@hyderabad.bits-pilani.ac.in
+      from: f20220005@hyderabad.bits-pilani.ac.in
+      smarthost: smtp.gmail.com:587
+      auth_username: f20220005@hyderabad.bits-pilani.ac.in
+      auth_identity: f20220005@hyderabad.bits-pilani.ac.in
+      auth_password: htrd zhic fwqe xoxr
+      send_resolved: true
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
